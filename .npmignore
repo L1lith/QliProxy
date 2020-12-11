@@ -9,5 +9,5 @@ node_modules/
 /tests/
 /source/
 
-!/dist/NPM-Project-commonjs.min.js
+!/dist/Qliphoth-commonjs.js
 !/**/.gitkeep

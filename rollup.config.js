@@ -9,9 +9,9 @@ import deepmerge from 'deepmerge'
 const baseConfig = {
     input: join(__dirname, 'source', 'index.js'),
     output: {
-        name: 'NPMProject'
+        name: 'Qliphoth'
     },
-    name: 'NPMProject',
+    name: 'Qliphoth',
     plugins: [
         resolve({ jsnext: true }),
         commonjs({
@@ -31,19 +31,19 @@ const branchConfigs = [
     {
         output: {
             format: 'iife',
-            file: join(__dirname, 'dist', 'NPM-Project-browser.min.js')
+            file: join(__dirname, 'dist', 'Qliphoth-browser.min.js')
         }
     },
     {
         output: {
             format: 'cjs',
-            file: join(__dirname, 'dist', 'NPM-Project-commonjs.js')
+            file: join(__dirname, 'dist', 'Qliphoth-commonjs.js')
         }
     },
     {
         output: {
             format: 'umd',
-            file: join(__dirname, 'dist', 'NPM-Project-universal.min.js')
+            file: join(__dirname, 'dist', 'Qliphoth-universal.min.js')
         }
     }
 ]
