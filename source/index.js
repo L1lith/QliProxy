@@ -1,2 +1,3 @@
-export { default as Proxy } from "./BasicProxy"
-export { default as BasicProxy } from "./BasicProxy"
+export { default as Proxy } from "./QliProxy"
+export { default as QliProxy } from "./QliProxy"
+export { default as ShimClone } from "./ShimClone"

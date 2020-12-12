@@ -9,5 +9,5 @@ node_modules/
 /tests/
 /source/
 
-!/dist/Qliphoth-commonjs.js
+!/dist/Qliproxy-commonjs.js
 !/**/.gitkeep

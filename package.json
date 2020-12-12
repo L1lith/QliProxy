@@ -1,8 +1,8 @@
 {
-  "name": "getargs",
+  "name": "qliproxy",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/Qliphoth-commonjs.js",
+  "main": "dist/Qliproxy-commonjs.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.7.4",

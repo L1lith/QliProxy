@@ -1,7 +1,7 @@
 const readOptions = ["allow", "error", "undefined"]
 const writeOptions = ["allow", "error", "silent"]
 
-export function createBasicProxy(options={}) {
+function createBasicProxy(options={}) {
   const originalObject = (typeof options.object == 'object' && options.object !== null) || typeof options.object == 'function' ? options.object : null
   const proxyOptions = {}
   const privateStore = typeof options.store == 'object' ? options.store : null
@@ -18,6 +18,11 @@ export function createBasicProxy(options={}) {
     throw new Error("Invalid Read Option")
   }
   //const write = typeof options.write == 'string' && writeOptions.includes(options.write) ? options.write : options.write ? 'allow' : 'silent'
+  if (options.hasOwnProperty('execute')) {
+    proxyOptions.apply = (target, thisArg, args) => {
+      return options.execute.apply(thisArg, dataSources.concat(args))
+    }
+  }
   let write
   if (!options.hasOwnProperty('write')) {
     write = "allow"
@@ -29,11 +34,10 @@ export function createBasicProxy(options={}) {
   } else {
     throw new Error("Invalid Write Option")
   }
-  console.log({arguments: [...arguments], options})
   if (typeof options.get == 'function') {
     if (read !== "allow") throw new Error("Reading is not allowed but a get function was also supplied")
-    proxyOptions.get = (target, prop) => {
-      return options.get(prop, ...dataSources)
+    proxyOptions.get = (target, args) => {
+      return options.get.apply(null, dataSources.concat(args))
     }
   } else if (read === "error") {
     proxyOptions.get = () => {
@@ -46,8 +50,8 @@ export function createBasicProxy(options={}) {
   }
   if (typeof options.set == 'function') {
     if (write !== "allow") throw new Error("Writing is not allowed but a set function was also supplied")
-    proxyOptions.set = (target, prop, value) => {
-      const result = options.set.apply(null, dataSources.concat([prop, value]))
+    proxyOptions.set = (target, ...args) => {
+      const result = options.set.apply(null, dataSources.concat(args))
       if (typeof result == 'boolean') {
         return result
       } else {
@@ -63,9 +67,28 @@ export function createBasicProxy(options={}) {
       return true
     }
   }
+  if (typeof options.delete == 'function') {
+    if (write !== "allow") throw new Error("Writing is not allowed but a delete function was also supplied")
+    proxyOptions.deleteProperty = (target, ...args) => {
+      const result = options.delete.apply(null, dataSources.concat(args))
+      if (typeof result == 'boolean') {
+        return result
+      } else {
+        return true
+      }
+    }
+  } else if (write === "error") {
+    proxyOptions.deleteProperty = () => {
+      throw new Error("Writing properties is not allowed")
+    }
+  } else if (write === "silent") {
+    proxyOptions.deleteProperty = () => {
+      return true
+    }
+  }
+
   if (typeof options.construct == 'function') {
     proxyOptions.construct = (target, args) => {
-      console.log({args}, dataSources.concat(args))
       return options.construct.apply(null, dataSources.concat(args))
     }
   }
@@ -75,6 +98,7 @@ export function createBasicProxy(options={}) {
   if (typeof options.has == 'function') {
     proxyOptions.has = ()=>options.has(...dataSources)
   }
-  console.log(originalObject, proxyOptions)
-  return new Proxy(originalObject !== null ? originalObject : {}, proxyOptions)
+  return new Proxy(originalObject !== null ? originalObject : (options.hasOwnProperty('execute') ? ()=>{} : {}), proxyOptions)
 }
+
+export default createBasicProxy

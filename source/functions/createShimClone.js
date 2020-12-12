@@ -3,6 +3,7 @@ import createBasicProxy from './createBasicProxy'
 function createShimClone(object) {
   return createBasicProxy({
     object,
+    store: {},
     get: (object, store, prop) => {
       if (prop in store) {
         return Reflect.get(store, prop)
@@ -12,6 +13,9 @@ function createShimClone(object) {
     },
     set: (object, store, prop, value) => {
       return Reflect.set(store, prop, value)
+    },
+    delete: (object, store, prop) => {
+      return Reflect.deleteProperty(store, prop)
     }
   })
 }

@@ -9,9 +9,9 @@ import deepmerge from 'deepmerge'
 const baseConfig = {
     input: join(__dirname, 'source', 'index.js'),
     output: {
-        name: 'Qliphoth'
+        name: 'QP'
     },
-    name: 'Qliphoth',
+    name: 'QP',
     plugins: [
         resolve({ jsnext: true }),
         commonjs({
@@ -22,7 +22,7 @@ const baseConfig = {
             presets: ['@babel/preset-env']
         }),
         uglify({
-            sourcemap: false
+            sourcemap: true
         })
     ]
 }
@@ -31,19 +31,19 @@ const branchConfigs = [
     {
         output: {
             format: 'iife',
-            file: join(__dirname, 'dist', 'Qliphoth-browser.min.js')
+            file: join(__dirname, 'dist', 'Qliproxy-browser.min.js')
         }
     },
     {
         output: {
             format: 'cjs',
-            file: join(__dirname, 'dist', 'Qliphoth-commonjs.js')
+            file: join(__dirname, 'dist', 'Qliproxy-commonjs.js')
         }
     },
     {
         output: {
             format: 'umd',
-            file: join(__dirname, 'dist', 'Qliphoth-universal.min.js')
+            file: join(__dirname, 'dist', 'Qliproxy-universal.min.js')
         }
     }
 ]
@@ -51,5 +51,5 @@ const branchConfigs = [
 const configs = branchConfigs.map(config => deepmerge(baseConfig, config))
 
 configs[1].plugins.splice(0, 1) // Don't include dependencies in node bundle
-configs[1].plugins.splice(2) // Don't Uglify the node bundle
+//configs[1].plugins.splice(2) // Don't Uglify the node bundle
 export default configs
