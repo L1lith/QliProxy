@@ -1,14 +1,10 @@
 import createShimClone from './functions/createShimClone'
 import createBasicProxy from './functions/createBasicProxy'
 
-class ShimClone {
-  constructor() {
-    throw new Error("This constructor cannot be called directly")
-  }
-}
+function ShimProxy() {}
 
 const proxyWrapperOptions = {
-  object: ShimClone,
+  object: ShimProxy,
   writable: false,
   readable: true,
   construct: (originalObject, ...args) => {
