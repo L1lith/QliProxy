@@ -1,21 +1,20 @@
-import createShimClone from './functions/createShimClone'
+import createDeepProxy from './functions/createDeepProxy'
 import createBasicProxy from './functions/createBasicProxy'
 
-class ShimClone {
-  constructor() {
-    throw new Error("This constructor cannot be called directly")
-  }
+function DeepProxy() {
+  //throw new Error("This constructor cannot be called directly")
+  // Do Nothing
 }
 
 const proxyWrapperOptions = {
-  object: ShimClone,
+  object: DeepProxy,
   writable: false,
   readable: true,
   construct: (originalObject, ...args) => {
-    return createShimClone.apply(null, args)
+    return createDeepProxy.apply(null, args)
   },
   execute: (originalObject, ...args) => {
-    return createShimClone.apply(null, args)
+    return createDeepProxy.apply(null, args)
   }
 }
 
