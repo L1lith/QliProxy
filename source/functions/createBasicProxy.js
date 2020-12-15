@@ -1,11 +1,12 @@
 const readOptions = ["allow", "error", "undefined"]
 const writeOptions = ["allow", "error", "silent"]
 
+
 function createBasicProxy(options={}) {
   const originalObject = (typeof options.object == 'object' && options.object !== null) || typeof options.object == 'function' ? options.object : null
   const proxyOptions = {}
-  const privateStore = typeof options.store == 'object' ? options.store : null
-  const dataSources = [originalObject, privateStore].filter(value => value !== null)
+  const privateStore = typeof options.store == 'object' && options.store !== null ? options.store : {}
+  const dataSources = [originalObject, privateStore]
   let read
   if (!options.hasOwnProperty('read')) {
     read = "allow"
@@ -19,7 +20,7 @@ function createBasicProxy(options={}) {
   }
   //const write = typeof options.write == 'string' && writeOptions.includes(options.write) ? options.write : options.write ? 'allow' : 'silent'
   if (options.hasOwnProperty('execute')) {
-    proxyOptions.apply = (target, thisArg, args) => {
+    proxyOptions.execute = (target, thisArg, args) => {
       return options.execute.apply(thisArg, dataSources.concat(args))
     }
   }

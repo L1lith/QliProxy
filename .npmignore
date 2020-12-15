@@ -11,3 +11,4 @@ node_modules/
 
 !/dist/Qliproxy-commonjs.js
 !/**/.gitkeep
+/scratch/
