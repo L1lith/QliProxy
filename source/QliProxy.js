@@ -14,10 +14,10 @@ const proxyWrapperOptions = {
   object: QliProxy,
   writable: false,
   readable: true,
-  construct: (originalObject, ...args) => {
+  construct: (dataSources, args) => {
     return createBasicProxy.apply(null, args)
   },
-  execute: (originalObject, ...args) => {
+  execute: (dataSources, target, args) => {
     return createBasicProxy.apply(null, args)
   }
 }
