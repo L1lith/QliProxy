@@ -1,5 +1,14 @@
-import {Any}
+import { ANY } from "sandhands";
 
-module.exports = {
-  Object:
-}
+export default {
+  _: {
+    object: { _: ANY },
+    writable: { _: Boolean },
+    readable: { _: Boolean },
+    construct: { _: Function },
+    execute: { _: Function },
+    get: { _: Function },
+    set: { _: Function },
+  },
+  allOptional: true,
+};

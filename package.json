@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/Qliproxy-commonjs.js",
-  "dependencies": {},
+  "dependencies": {
+    "sandhands": "^1.8.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
@@ -24,6 +26,7 @@
     "build": "rollup -c",
     "build-production": "NODE_ENV=production && rollup -c --environment NODE_ENV:production",
     "build-production-windows": "set NODE_ENV=production && rollup -c --environment NODE_ENV:production",
+    "pretest": "npm run build",
     "test": "mocha \"tests/**/*.js\""
   },
   "repository": {
