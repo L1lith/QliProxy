@@ -1,6 +1,9 @@
 ## QliProxy
 Designed to help you work with JS Proxy with ease.
 
+### Warning
+This project is in the early stages of development! Please feel free to make a pull request :)
+
 #### Getting Started
 1. To begin using QliProxy, make sure you have it installed
 
@@ -36,8 +39,8 @@ To learn how to utilize your proxy object please see the section below
 | delete    | intercepts properties being deleted                          | callback function  |
 | object    | allows you to provide a base object to initialize your proxy | object or function |
 | getKeys   | intercepts and provides the keys when they're enumerated     | callback function  |
-| readable  | allows you to enable/disable the reading of properties       | boolean            |
-| writable  | allows you to enable/disable the modification of properties  | boolean            |
+| read  | allows you to enable/disable the reading of properties           | boolean            |
+| write  | allows you to enable/disable the modification of properties     | boolean            |
 | has       | intercepts calls to hasOwnProperty and the in operator       | callback function  |
 | construct | intercepts constructor calls (applicable to classes only)    | callback function  |
 | execute   | intercepts function execution (applicable to functions only) | callback function  |
