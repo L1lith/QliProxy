@@ -51,7 +51,7 @@ function createBasicProxy(options = null) {
     if (read !== 'allow')
       throw new Error('Reading is not allowed but a get function was also supplied')
     proxyOptions.get = (target, args) => {
-      return options.get.apply(null, [dataSources, ...args])
+      return options.get.apply(null, [dataSources].concat(args.slice(0, 2)))
     }
   } else if (read === 'error') {
     proxyOptions.get = () => {
@@ -66,7 +66,7 @@ function createBasicProxy(options = null) {
     if (write !== 'allow')
       throw new Error('Writing is not allowed but a set function was also supplied')
     proxyOptions.set = (target, ...args) => {
-      const result = options.set.apply(null, [dataSources, ...args])
+      const result = options.set.apply(null, [dataSources].concat(args.slice(0, 2)))
       if (typeof result == 'boolean') {
         return result
       } else {
@@ -86,7 +86,7 @@ function createBasicProxy(options = null) {
     if (write !== 'allow')
       throw new Error('Writing is not allowed but a delete function was also supplied')
     proxyOptions.deleteProperty = (target, ...args) => {
-      const result = options.delete.apply(null, [dataSources, ...args])
+      const result = options.delete.apply(null, [dataSources].concat(args.slice(0, 2)))
       if (typeof result == 'boolean') {
         return result
       } else {

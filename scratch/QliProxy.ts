@@ -1,4 +1,4 @@
-import createBasicProxy from './functions/createBasicProxy'
+import createBasicProxy from '../source/functions/createBasicProxy'
 
 // class QliProxy {
 //   constructor() {
