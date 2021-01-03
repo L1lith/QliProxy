@@ -12,8 +12,8 @@ function QliProxy() {
 
 const proxyWrapperOptions = {
   object: QliProxy,
-  writable: false,
-  readable: true,
+  write: false,
+  read: true,
   construct: (dataSources, args) => {
     return createBasicProxy.apply(null, args)
   },

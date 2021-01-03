@@ -1,14 +1,14 @@
-import { ANY } from "sandhands";
+import { ANY } from 'sandhands'
 
 export default {
   _: {
     object: { _: ANY },
-    writable: { _: Boolean },
-    readable: { _: Boolean },
+    write: { _: Boolean },
+    read: { _: Boolean },
     construct: { _: Function },
     execute: { _: Function },
     get: { _: Function },
-    set: { _: Function },
+    set: { _: Function }
   },
-  allOptional: true,
-};
+  allOptional: true
+}

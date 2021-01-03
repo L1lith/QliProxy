@@ -24,9 +24,10 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "build-production": "NODE_ENV=production && rollup -c --environment NODE_ENV:production",
     "build-production-windows": "set NODE_ENV=production && rollup -c --environment NODE_ENV:production",
     "pretest": "npm run build",
+    "build-production": "rollup -c --prod",
+    "prepublishOnly": "npm run test && npm run build-production-windows",
     "test": "mocha \"tests/**/*.js\""
   },
   "repository": {

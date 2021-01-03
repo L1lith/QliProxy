@@ -1,12 +1,8 @@
 const { QliProxy } = require('../../dist/Qliproxy-commonjs')
 
-function createPropertyMirror(propertyValue, type="basic") {
-  const options = {get: ()=>propertyValue}
-  if (type === "basic") {
-    return QliProxy(options)
-  } else {
-    throw new Error("Invalid Type Value")
-  }
+function createPropertyMirror(propertyValue) {
+  const options = { get: () => propertyValue }
+  return QliProxy(options)
 }
 
 module.exports = createPropertyMirror
